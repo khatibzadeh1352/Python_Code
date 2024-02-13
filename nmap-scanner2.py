@@ -89,7 +89,7 @@ def nmapfunc(target_ip , arg3 ) :
         file1.close
 # End of nmap function
 
-mybanner=pyfiglet.figlet_format("MPK-H@CKer-RI4",font="speed")
+mybanner=pyfiglet.figlet_format("MPK-H@-RI4",font="speed")
 print (colorama.Fore.RED+mybanner+colorama.Fore.RESET)
 mymenue='''
 [1] T0
