@@ -1,3 +1,4 @@
+# Release 02/16/2024   Author  M.KHA1352
 import pyfiglet
 import colorama
 import random
@@ -100,6 +101,25 @@ mymenue='''
 [6] T5
 '''
 
+mymenue2 ='''
+[1] WAF Detection(First Approach)
+[2] WAF Detection (Second Approach)
+[3] Firewall Bypass Scan with Syn Stealth scan for enumeration of access control list
+[4] Firewall Bypass Approach with firewall enumaration
+[5] Firewall Bypass Approach with tcp windows scanning for firewall enumaration
+[6] Firewall Bypass Approach with Custom MTU size 
+[7] Firewall Bypas with spoof mac address
+[8] Firewall Bypass with with custom data length 
+[9] Firewall Bypass with  bad checksum
+'''
+
+mymenue3='''
+[1] 8
+[2] 16
+[3] 24
+[4] 32
+'''
+
 nmap_output_file="nmap1.txt"
 flag1="true"
 while flag1=="true":
@@ -120,7 +140,8 @@ mymenue1.insert(3,"4- SYN Scan"+"                  "+"12- Fast Scan")
 mymenue1.insert(4,"5- NULL Scan"+"                 "+"13- safe script Scan")
 mymenue1.insert(5,"6- TCP Scan"+"                  "+"14- Vulnerability Scan (Only run in Linux-Os)")
 mymenue1.insert(6,"7- ACK-PING Scan"+"             "+"15- Aggersive Scan")
-mymenue1.insert(7,"8- IP Protocol Scan"+"          "+"16- Exit")
+mymenue1.insert(7,"8- IP Protocol Scan"+"          "+"16- WAF/Firewall Bypass Scan And Detection")
+mymenue1.insert(8,"17- Exit"+"          ")
 #mymenue1.insert(4,"5- NULL Scan")
 #mymenue1.insert(5,"6- TCP Scan")
 #mymenue1.insert(6,"7- ACK-PING Scan")
@@ -145,6 +166,12 @@ delay_template="T5"
 fragment_status=""
 fragment_choice=""
 flag2=""
+firewall_choice_input="1"
+firewall_choice=1
+mtu="8"
+mtu1=1
+data_len="25"
+data_len1=25
 #print(mymenue1[i])
 #print (mymenue)
 #print(random.random()
@@ -156,7 +183,7 @@ while True :
     for i in mymenue1 :
         print(i)
     var1 = int(input("please input your choice:"))
-    if var1==16: 
+    if var1==17: 
         exit()
     elif var1==1:
         flag2="true"
@@ -173,7 +200,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<=0 or delay_chice1>6:
@@ -238,7 +265,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -250,7 +277,7 @@ while True :
             fragment_choice=" -f"
         else:
             fragment_choice=""        
-        arg1="-sU -v -p"+port_range+"-T"+str(delay_chice1)
+        arg1="-sU -v -p"+port_range+"-T"+str(delay_chice1)+fragment_choice
         nmapfunc(ip1, arg1)
     
     elif var1==3 :
@@ -268,7 +295,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -280,7 +307,7 @@ while True :
             fragment_choice=" -f"
         else:
             fragment_choice=""    
-        arg1="-v -p 139,445"+"-T"+str(delay_chice1)
+        arg1="-v -p 139,445"+"-T"+str(delay_chice1)+fragment_choice
         nmapfunc(ip1, arg1)
     
     elif var1==4 :
@@ -300,7 +327,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -332,7 +359,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -344,7 +371,7 @@ while True :
             fragment_choice=" -f"
         else:
             fragment_choice=""         
-        arg1="-sN -v -p"+port_range+"-T"+str(delay_chice1)
+        arg1="-sN -v -p"+port_range+"-T"+str(delay_chice1)+fragment_choice
         nmapfunc(ip1, arg1)    
     
     elif var1==6 :
@@ -364,7 +391,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -396,7 +423,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -408,7 +435,7 @@ while True :
             fragment_choice=" -f"
         else:
             fragment_choice=""        
-        arg1="-PA -v -p"+port_range+"-T"+str(delay_chice1)
+        arg1="-PA -v -p"+port_range+"-T"+str(delay_chice1)+fragment_choice
         nmapfunc(ip1, arg1)
     elif var1==8 :
         flag2="true"
@@ -427,7 +454,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -439,7 +466,7 @@ while True :
             fragment_choice=" -f"
         else:
             fragment_choice=""          
-        arg1="-PO -v -p "+port_range+"-T"+str(delay_chice1)
+        arg1="-PO -v -p "+port_range+"-T"+str(delay_chice1)+fragment_choice
         nmapfunc(ip1, arg1)    
     
     elif var1==9 :
@@ -459,7 +486,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -471,7 +498,7 @@ while True :
             fragment_choice=" -f"
         else:
             fragment_choice=""        
-        arg1="-sZ -v -p "+port_range+"-T"+str(delay_chice1)
+        arg1="-sZ -v -p "+port_range+"-T"+str(delay_chice1)+fragment_choice
         nmapfunc(ip1, arg1)    
     
     elif var1==10 :
@@ -490,7 +517,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -502,7 +529,7 @@ while True :
             fragment_choice=" -f"
         else:
             fragment_choice=""          
-        arg1="-sA -v -P0 -p "+port_range+"-T"+str(delay_chice1)
+        arg1="-sA -v -P0 -p "+port_range+"-T"+str(delay_chice1)+fragment_choice
         nmapfunc(ip1, arg1)   
     
     elif var1==11 :
@@ -522,7 +549,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -534,7 +561,7 @@ while True :
             fragment_choice=" -f"
         else:
             fragment_choice=""              
-        arg1="-sV -A --version-light --version-all -v -p "+port_range+"-T"+str(delay_chice1)
+        arg1="-sV -A --version-light --version-all -v -p "+port_range+"-T"+str(delay_chice1)+fragment_choice
         nmapfunc(ip1, arg1)   
         
     elif var1==12 :
@@ -554,7 +581,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -566,7 +593,7 @@ while True :
             fragment_choice=" -f"
         else:
             fragment_choice=""            
-        arg1="-sV -F  --version-all -v -p "+port_range+"-T"+str(delay_chice1)
+        arg1="-sV -F  --version-all -v -p "+port_range+"-T"+str(delay_chice1)+fragment_choice
         nmapfunc(ip1, arg1)   
         
     elif var1==13 :
@@ -586,7 +613,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -598,7 +625,7 @@ while True :
             fragment_choice=" -f"
         else:
             fragment_choice=""             
-        arg1="-sV --version-light --version-all -v --script safe -p "+port_range+"-T"+str(delay_chice1)
+        arg1="-sV --version-light --version-all -v --script safe -p "+port_range+"-T"+str(delay_chice1)+fragment_choice
         nmapfunc(ip1, arg1)      
        
     elif var1==14 :
@@ -639,7 +666,7 @@ while True :
         print(mymenue)
         delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
         if delay_chice1_input=="" :
-            delay_chice1_input="6"
+            delay_chice1=6
         else:
             delay_chice1=int(delay_chice1_input)
         if delay_chice1<0 or delay_chice1>6:
@@ -651,14 +678,98 @@ while True :
             fragment_choice=" -f"
         else:
             fragment_choice=""              
-        arg1="-sV -A -sS -sC -sV --open --reason --version-light --version-all -vv -p "+port_range+"-T"+str(delay_chice1)
+        arg1="-sV -A -sS -sC -sV --open --reason --version-light --version-all -vv -p "+port_range+"-T"+str(delay_chice1)+fragment_choice
         nmapfunc(ip1, arg1)   
-                                                                                
-    #elif var1==17 :
-    #    file_download_name=input("pls enter file-path:")
-    #    #url1 = 'https://www.facebook.com/favicon.ico'
-    #    url1=file_download_name
-    #    r1 = requests.get(url1, allow_redirects=True)
-    #    open('myfile1.txt', 'wb').write(r1.content)
-    elif var1 >16 or var1 <1:
+  
+
+    elif var1==16 :
+        flag2="true"
+        while flag2=="true" :
+            ip1=input("pls enter your IP Address/network-range:")
+            try:
+                ip_object=ipaddress.ip_address(ip1)
+                flag2="false"
+            except ValueError:
+                print("your Ip-Address Syntax Incorrect. pls enter correct IP:")
+                continue
+
+    
+ #       port1=input("pls enter your Port/Port-range:")
+        print(mymenue)
+        delay_chice1_input=(input("pls enter your delay template Choice-T0 slower and T5 faster- default is T5: "))
+        if delay_chice1_input=="" :
+            delay_chice1=6
+        else:
+            delay_chice1=int(delay_chice1_input)
+        if delay_chice1<0 or delay_chice1>6:
+            delay_chice1=5
+        else:
+            delay_chice1=delay_chice1-1  
+        fragment_status=input("Do you want fragmentation in scan?y/n: ")
+        if fragment_status=="y" or fragment_status=="Y":
+            fragment_choice=" -f"
+        else:
+            fragment_choice=""         
+
+        print(mymenue2)
+        firewall_choice_input=(input("pls enter your delay Firewall Choice for Bypass technique- Defauelt is 1: "))
+        if firewall_choice_input=="" :
+            firewall_choice=1
+        else:
+            firewall_choice=int(firewall_choice_input)
+        if firewall_choice<=0 or firewall_choice>6:
+            firewall_choice=1
+        if firewall_choice==1:
+            arg1=" -p 80,443 --script=http-waf-detect "+"-T"+str(delay_chice1)+fragment_choice
+        elif firewall_choice==2:
+            arg1=" -p 80,443 --script=http-waf-fingerprint "+"-T"+str(delay_chice1)+fragment_choice
+        elif firewall_choice==3:
+            port1,port2=input_port_validation()
+            port_range=port1+"-"+port2        
+            arg1="-p "+port_range+" -sS -O -PI -PT "+"-T"+str(delay_chice1)+fragment_choice
+        elif firewall_choice==4:
+            port1,port2=input_port_validation()
+            port_range=port1+"-"+port2        
+            arg1="-p "+port_range+" -sA -O -PI -PT "+"-T"+str(delay_chice1)+fragment_choice      
+        elif firewall_choice==5:
+            port1,port2=input_port_validation()
+            port_range=port1+"-"+port2        
+            arg1="-p "+port_range+" -sW -O -PI -PT "+"-T"+str(delay_chice1)+fragment_choice   
+        elif firewall_choice==6:
+            port1,port2=input_port_validation()
+            port_range=port1+"-"+port2  
+            print(mymenue3)
+            mtu=(input("pls enter your MTU Size for Bypass technique- Defauelt is 8: "))
+            if mtu=="" :
+                mtu1=8 
+            elif int(mtu)==2:
+                mtu1=16
+            elif int(mtu)==3:
+                mtu1=24
+            elif int(mtu)==4:
+                mtu1=32    
+            else:
+                mtu1=8            
+            arg1="-p "+port_range+" -mtu "+str(mtu1)+ " -sA -O -PI -PT "+"-T"+str(delay_chice1)+fragment_choice               
+            print(arg1)
+        elif firewall_choice==7:
+            port1,port2=input_port_validation()
+            port_range=port1+"-"+port2        
+            arg1="-p "+port_range+" --spoof-mac 0 -sA -O -PI -PT "+"-T"+str(delay_chice1)+fragment_choice     
+        elif firewall_choice==8:
+            port1,port2=input_port_validation()
+            port_range=port1+"-"+port2       
+            data_len=(input("pls enter your Data_lenght Size for Bypass technique- Defauelt is 25: "))         
+            arg1="-p "+port_range+"--data-length "+data_len+ "--spoof-mac 0 -sA -O -PI -PT "+"-T"+str(delay_chice1)+fragment_choice   
+        elif firewall_choice==9:
+            port1,port2=input_port_validation()
+            port_range=port1+"-"+port2        
+            arg1="-p "+port_range+" --badsum -sA -O -PI -PT"+"-T "+str(delay_chice1)+fragment_choice
+        else:
+            arg1=" -p 80,443 --script=http-waf-detect"+"-T "+str(delay_chice1)+fragment_choice                                                
+        print(arg1)
+        nmapfunc(ip1, arg1)     
+
+                                                                                  
+    elif var1 >17 or var1 <1:
          exit()
